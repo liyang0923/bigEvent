@@ -16,7 +16,8 @@ $(function() {
   var layer = layui.layer
   // 通过 form.verify() 函数自定义校验规则
   form.verify({
-    // 自定义了一个叫做 pwd 校验规则
+    // 自定义了一个叫做 pwd 校验规则  
+    //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
     pwd: [/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'],
     // 校验两次密码是否一致的规则
     repwd: function(value) {
@@ -31,23 +32,33 @@ $(function() {
     }
   })
 
-  // 监听注册表单的提交事件
-  $('#form_reg').on('submit', function(e) {
-    // 1. 阻止默认的提交行为
-    e.preventDefault()
-    // 2. 发起Ajax的POST请求
-    var data = {
-      username: $('#form_reg [name=username]').val(),
-      password: $('#form_reg [name=password]').val()
-    }
-    $.post('/api/reguser', data, function(res) {
-      if (res.status !== 0) {
-        return layer.msg(res.message)
+
+  // 导入弹出层模块
+  var layer = layui.layer;
+
+  $('#form_reg').on('submit',function(e){
+      //1.阻止表单提交按钮的默认提交行为
+      e.preventDefault()
+      //2.发起Ajax请求
+
+      // 获取表单数据
+      var data = {
+          username:$('#form_reg [name=username]').val(),
+          password:$('#form_reg [name=password]').val()
       }
-      layer.msg('注册成功，请登录！')
-      // 模拟人的点击行为
-      $('#link_login').click()
-    })
+      $.ajax({
+          method:"POST",
+          url:'/api/reguser',
+          data,
+          success:function(res){
+            if(res.status !== 0){
+                return layer.msg(res.message) //当注册失败时 弹出层显示的信息
+            }
+            layer.msg('注册成功了,你好棒棒哟!')
+            //注册成功时会自动跳转到登录   模拟人点击了去登录链接
+            $('#link_login').click()
+          }
+      })
   })
 
   // 监听登录表单的提交事件
