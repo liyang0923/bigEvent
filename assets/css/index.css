@@ -1,5 +1,5 @@
 .layui-footer {
-  text-align: center;
+  text-align: center;  /* 底部标签居中 */
   font-size: 12px;
 }
 
@@ -13,24 +13,24 @@
 }
 
 iframe {
-  width: 100%;
+  width: 100%; /* 设置内容主题区域的样式 撑满盒子 */
   height: 100%;
 }
 
 .layui-body {
-  overflow: hidden;
+  overflow: hidden; /* 干掉外部的滚动条 */
 }
 
 a {
-  transition: none !important;
+  transition: none !important; /* 干掉layui自带的css3链接动画效果 */
 }
 
-.userinfo {
+.userinfo { /* 调整头像和文字位置样式 */
   height: 60px;
   line-height: 60px;
   text-align: center;
   font-size: 12px;
-  user-select: none;
+  user-select: none;/* 禁止文字被选中 */
 }
 
 .layui-side-scroll .userinfo {
@@ -42,7 +42,7 @@ a {
   height: 40px;
 }
 
-.text-avatar {
+.text-avatar {  /* 对文本头像的样式设置 */
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -55,4 +55,9 @@ a {
   position: relative;
   top: 4px;
   margin-right: 10px;
+}
+
+#welcome {
+    font-size: 12px;
+    color: #ccc;
 }
